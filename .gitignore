@@ -1,0 +1,15 @@
+*
+!README*
+!.gitignore
+!lib
+!here_goes_paradiseo*
+!eoTutorial/
+!Lesson*/
+!mpiTutorial/
+!SimpleEOMPIProject
+!*Makefile*
+!*.cpp
+!*.c
+!*.h
+!*.param
+!*.cxx
