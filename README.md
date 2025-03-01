@@ -23,6 +23,7 @@ Inserire la cartella paradiseo-3.0.0 nella cartella lib
 
 ## 3. Risoluzione problemi MPI e MO
 Se si volesse abilitare il supporto MPI, scaricare la cartella [mpi](https://github.com/Alessandro624/paradiseo/tree/master/eo/src/mpi) e sostituirla all'interno della libreria in ./lib/paradiseo-3.0.0/eo/src
+
 Scaricare il file [eoInit.h](https://github.com/Alessandro624/paradiseo/blob/master/eo/src/eoInit.h) e sostituirlo all'interno della libreria in ./lib/paradiseo-3.0.0/eo/src per la compilazione delle lezioni presenti in moTutorial
 
 ## 4. Compilazione base
