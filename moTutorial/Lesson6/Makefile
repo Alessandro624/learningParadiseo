@@ -1,0 +1,95 @@
+CXX = g++
+PARADISEO = ../../lib/paradiseo-3.0.0
+CXXFLAGS = -std=c++17 -I $(PARADISEO)/eo/src -I $(PARADISEO)/mo/src -I $(PARADISEO)/problems -Wno-deprecated-declarations -Wall -Wextra -MMD -MP
+LDFLAGS = -L$(PARADISEO)/build/lib/ -leo -leoutils -leoserial -les -lga -lcma
+
+SRC_ADAPT_WALK = adaptiveWalks.cpp
+EXEC_ADAPT_WALK = adaptiveWalks
+OBJ_ADAPT_WALK = $(SRC_ADAPT_WALK:.cpp=.o)
+
+SRC_AUTO_CORR = autocorrelation.cpp
+EXEC_AUTO_CORR = autocorrelation
+OBJ_AUTO_CORR = $(SRC_AUTO_CORR:.cpp=.o)
+
+SRC_DENSITY = densityOfStates.cpp
+EXEC_DENSITY = densityOfStates
+OBJ_DENSITY = $(SRC_DENSITY:.cpp=.o)
+
+SRC_FDC = fdc.cpp
+EXEC_FDC = fdc
+OBJ_FDC = $(SRC_FDC:.cpp=.o)
+
+SRC_FIT = fitnessCloud.cpp
+EXEC_FIT = fitnessCloud
+OBJ_FIT = $(SRC_FIT:.cpp=.o)
+
+SRC_NEUTRAL_DEG = neutralDegree.cpp
+EXEC_NEUTRAL_DEG = neutralDegree
+OBJ_NEUTRAL_DEG = $(SRC_NEUTRAL_DEG:.cpp=.o)
+
+SRC_NEUTRAL_WALK = neutralWalk.cpp
+EXEC_NEUTRAL_WALK = neutralWalk
+OBJ_NEUTRAL_WALK = $(SRC_NEUTRAL_WALK:.cpp=.o)
+
+SRC_SAMPLING = sampling.cpp
+EXEC_SAMPLING = sampling
+OBJ_SAMPLING = $(SRC_SAMPLING:.cpp=.o)
+
+SRC_METROPOLIS = testMetropolisHasting.cpp
+EXEC_METROPOLIS = testMetropolisHasting
+OBJ_METROPOLIS = $(SRC_METROPOLIS:.cpp=.o)
+
+SRC_RANDOM_NEUTRAL_WALK = testRandomNeutralWalk.cpp
+EXEC_RANDOM_NEUTRAL_WALK = testRandomNeutralWalk
+OBJ_RANDOM_NEUTRAL_WALK = $(SRC_RANDOM_NEUTRAL_WALK:.cpp=.o)
+
+SRC_RANDOM_WALK = testRandomWalk.cpp
+EXEC_RANDOM_WALK = testRandomWalk
+OBJ_RANDOM_WALK = $(SRC_RANDOM_WALK:.cpp=.o)
+
+
+EXEC = $(EXEC_ADAPT_WALK) $(EXEC_AUTO_CORR) $(EXEC_DENSITY) $(EXEC_FDC) $(EXEC_FIT) $(EXEC_NEUTRAL_DEG) $(EXEC_NEUTRAL_WALK) $(EXEC_SAMPLING) $(EXEC_METROPOLIS) $(EXEC_RANDOM_NEUTRAL_WALK) $(EXEC_RANDOM_WALK)
+OBJ = $(OBJ_ADAPT_WALK) $(OBJ_AUTO_CORR) $(OBJ_DENSITY) $(OBJ_FDC) $(OBJ_FIT) $(OBJ_NEUTRAL_DEG) $(OBJ_NEUTRAL_WALK) $(OBJ_SAMPLING) $(OBJ_METROPOLIS) $(OBJ_RANDOM_NEUTRAL_WALK) $(OBJ_RANDOM_WALK)
+
+default: clean all
+
+all: $(EXEC)
+
+$(EXEC_ADAPT_WALK): $(OBJ_ADAPT_WALK)
+	$(CXX) $(OBJ_ADAPT_WALK) -o $(EXEC_ADAPT_WALK) $(LDFLAGS)
+
+$(EXEC_AUTO_CORR): $(OBJ_AUTO_CORR)
+	$(CXX) $(OBJ_AUTO_CORR) -o $(EXEC_AUTO_CORR) $(LDFLAGS)
+
+$(EXEC_DENSITY): $(OBJ_DENSITY)
+	$(CXX) $(OBJ_DENSITY) -o $(EXEC_DENSITY) $(LDFLAGS)
+
+$(EXEC_FDC): $(OBJ_FDC)
+	$(CXX) $(OBJ_FDC) -o $(EXEC_FDC) $(LDFLAGS)
+
+$(EXEC_FIT): $(OBJ_FIT)
+	$(CXX) $(OBJ_FIT) -o $(EXEC_FIT) $(LDFLAGS)
+
+$(EXEC_NEUTRAL_DEG): $(OBJ_NEUTRAL_DEG)
+	$(CXX) $(OBJ_NEUTRAL_DEG) -o $(EXEC_NEUTRAL_DEG) $(LDFLAGS)
+
+$(EXEC_NEUTRAL_WALK): $(OBJ_NEUTRAL_WALK)
+	$(CXX) $(OBJ_NEUTRAL_WALK) -o $(EXEC_NEUTRAL_WALK) $(LDFLAGS)
+
+$(EXEC_SAMPLING): $(OBJ_SAMPLING)
+	$(CXX) $(OBJ_SAMPLING) -o $(EXEC_SAMPLING) $(LDFLAGS)
+
+$(EXEC_METROPOLIS): $(OBJ_METROPOLIS)
+	$(CXX) $(OBJ_METROPOLIS) -o $(EXEC_METROPOLIS) $(LDFLAGS)
+
+$(EXEC_RANDOM_NEUTRAL_WALK): $(OBJ_RANDOM_NEUTRAL_WALK)
+	$(CXX) $(OBJ_RANDOM_NEUTRAL_WALK) -o $(EXEC_RANDOM_NEUTRAL_WALK) $(LDFLAGS)
+
+$(EXEC_RANDOM_WALK): $(OBJ_RANDOM_WALK)
+	$(CXX) $(OBJ_RANDOM_WALK) -o $(EXEC_RANDOM_WALK) $(LDFLAGS)
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+clean:
+	rm -f $(OBJ) $(EXEC) *.d *.sav *.xg *.status *~
