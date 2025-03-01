@@ -4,6 +4,7 @@
 !lib
 !here_goes_paradiseo*
 !eoTutorial/
+!moTutorial/
 !Lesson*/
 !mpiTutorial/
 !SimpleEOMPIProject
@@ -13,3 +14,4 @@
 !*.h
 !*.param
 !*.cxx
+!*.jpg
