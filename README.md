@@ -21,8 +21,9 @@ sudo apt install -y cmake make g++ libeigen3-dev libopenmpi-dev doxygen graphviz
 Se non si dispone già del codice sorgente di Paradiseo, scaricare la release 3.0.0 su [ParadisEO](https://github.com/nojhan/paradiseo/releases/tag/v3.0.0)
 Inserire la cartella paradiseo-3.0.0 nella cartella lib
 
-## 3. Risoluzione problemi MPI
-Se si volesse abilitare il supporto MPI, scaricare la cartella [mpi](https://github.com/Alessandro624/paradiseo/tree/master/eo/src/mpi) ed sostituirla all'interno della libreria in ./lib/paradiseo-3.0.0/eo/src
+## 3. Risoluzione problemi MPI e MO
+Se si volesse abilitare il supporto MPI, scaricare la cartella [mpi](https://github.com/Alessandro624/paradiseo/tree/master/eo/src/mpi) e sostituirla all'interno della libreria in ./lib/paradiseo-3.0.0/eo/src
+Scaricare il file [eoInit.h](https://github.com/Alessandro624/paradiseo/blob/master/eo/src/eoInit.h) e sostituirlo all'interno della libreria in ./lib/paradiseo-3.0.0/eo/src per la compilazione delle lezioni presenti in moTutorial
 
 ## 4. Compilazione base
 Per una compilazione standard senza moduli opzionali:
