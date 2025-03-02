@@ -1,4 +1,6 @@
 #include <iostream>
+#include <ctime> // sequential timing
+#include <mpi.h> // parallel timing
 using namespace std;
 
 #include <eo>
@@ -76,6 +78,7 @@ void run_ea(eoAlgo<Indi> &_ga, eoPop<Indi> &_pop);
 
 int main(int argc, char *argv[])
 {
+  double start_time = 0.0, end_time = 0.0;
   try
   {
     Node::init(argc, argv);
@@ -121,10 +124,14 @@ int main(int argc, char *argv[])
       MultiStartStore<Indi> store(ga, DEFAULT_MASTER, resetAlgo, getSeeds);
       // job configuration with 10 parallel executions
       MultiStart<Indi> msjob(assignmentAlgo, DEFAULT_MASTER, store, 10);
+      if (msjob.isMaster())
+        start_time = MPI_Wtime();
       msjob.run();
       // final output
       if (msjob.isMaster())
       {
+        end_time = MPI_Wtime();
+        cout << "Tempo di esecuzione MPI: " << end_time - start_time << " secondi" << endl;
         cout << "Migliori individui trovati: " << endl;
         msjob.best_individuals().sortedPrintOn(cout);
         cout << endl;
@@ -147,6 +154,8 @@ int main(int argc, char *argv[])
         ParallelEvalWrapper parallelEval(popEval);
         // parallel algorithm
         eoAlgo<Indi> &pga = make_algo_scalar(parser, state, parallelEval, checkpoint, op);
+        if (rank == 0)
+          start_time = MPI_Wtime();
         // evaluation of the initial population
         popEval(pop, pop);
         // print the initial population
@@ -155,6 +164,11 @@ int main(int argc, char *argv[])
         cout << endl;
         // run the algorithm
         run_ea(pga, pop);
+        if (rank == 0)
+        {
+          end_time = MPI_Wtime();
+          cout << "Tempo di esecuzione MPI: " << end_time - start_time << " secondi" << endl;
+        }
         // print the final population
         cout << "Final Population\n";
         pop.sortedPrintOn(cout);
@@ -172,6 +186,7 @@ int main(int argc, char *argv[])
     {
       if (rank == DEFAULT_MASTER)
       {
+        clock_t seq_start = clock();
         // sequential execution
         apply<Indi>(eval, pop);
         // initial population
@@ -180,10 +195,13 @@ int main(int argc, char *argv[])
         cout << endl;
         // run the algorithm
         run_ea(ga, pop);
+        clock_t seq_end = clock();
         // final population
         cout << "Final Population\n";
         pop.sortedPrintOn(cout);
         cout << endl;
+        cout << "Tempo di esecuzione sequenziale: "
+             << double(seq_end - seq_start) / CLOCKS_PER_SEC << " secondi" << endl;
       }
     }
     else
