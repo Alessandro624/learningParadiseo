@@ -1,57 +1,62 @@
-# Guida alla compilazione di ParadisEO
-Questa guida fornisce istruzioni dettagliate su come compilare la libreria Paradiseo 3.0.0 con supporto per MPI, Gnuplot e il modulo MO (Metaheuristic Optimization).
+[![🇮🇹 Italiano](https://img.shields.io/badge/lang-%F0%9F%87%AE%F0%9F%87%B9%20Italiano-green)](README.it.md)
+[![🇬🇧 English](https://img.shields.io/badge/lang-%F0%9F%87%AC%F0%9F%87%A7%20English-blue)](README.md)
 
-## 1. Requisiti
-Assicurarsi di avere installati i seguenti pacchetti prima di procedere con la compilazione:
+---
+
+# ParadisEO Compilation Guide
+This guide provides detailed instructions on how to compile the Paradiseo 3.0.0 library with support for MPI, Gnuplot, and the MO (Metaheuristic Optimization) module.
+
+## 1. Requirements
+Make sure you have the following packages installed before proceeding with the compilation:
 
 - **CMake**
 - **GCC**
-- **MPI** (OpenMPI) se si desidera abilitare il supporto MPI
-- **Gnuplot** (se si vuole abilitare il supporto per la visualizzazione grafica)
-- **Git** (per clonare il repository, se necessario)
+- **MPI** (OpenMPI) if you want to enable MPI support
+- **Gnuplot** (if you want to enable graphical visualization support)
+- **Git** (to clone the repository, if needed)
 
-### Installazione dei pacchetti richiesti (Ubuntu/Debian)
+### Install required packages (Ubuntu/Debian)
 
 ```sh
 sudo apt update
 sudo apt install -y cmake make g++ libeigen3-dev libopenmpi-dev doxygen graphviz libgnuplot-iostream-dev git
 ```
 
-## 2. Installazione Paradiseo
-Se non si dispone già del codice sorgente di Paradiseo, scaricare la release 3.0.0 su [ParadisEO](https://github.com/nojhan/paradiseo/releases/tag/v3.0.0)
-Inserire la cartella paradiseo-3.0.0 nella cartella lib
+## 2. Installing Paradiseo
+If you don't already have the Paradiseo source code, download release 3.0.0 from [ParadisEO](https://github.com/nojhan/paradiseo/releases/tag/v3.0.0)
+Place the paradiseo-3.0.0 folder inside the lib directory.
 
-## 3. Risoluzione problemi MPI e MO
-Se si volesse abilitare il supporto MPI, scaricare la cartella [mpi](https://github.com/Alessandro624/paradiseo/tree/master/eo/src/mpi) e sostituirla all'interno della libreria in ./lib/paradiseo-3.0.0/eo/src
+## 3. Troubleshooting MPI and MO
+If you want to enable MPI support, download the [mpi](https://github.com/Alessandro624/paradiseo/tree/master/eo/src/mpi) folder and replace it inside the library at ./lib/paradiseo-3.0.0/eo/src
 
-Scaricare il file [eoInit.h](https://github.com/Alessandro624/paradiseo/blob/master/eo/src/eoInit.h) e sostituirlo all'interno della libreria in ./lib/paradiseo-3.0.0/eo/src per la compilazione delle lezioni presenti in moTutorial
+Download the file [eoInit.h](https://github.com/Alessandro624/paradiseo/blob/master/eo/src/eoInit.h) and replace it inside the library at ./lib/paradiseo-3.0.0/eo/src to compile the lessons in moTutorial
 
-## 4. Compilazione base
-Per una compilazione standard senza moduli opzionali:
+## 4. Basic Compilation
+For a standard compilation without optional modules:
 ```sh
 mkdir build && cd build
 cmake ..
 make -j
 ```
 
-## 5. Compilazione con MPI
-Se si desidera attivare il supporto MPI, bisogna abilitare l'opzione MPI:
+## 5. Compilation with MPI
+If you want to enable MPI support, you need to enable the MPI option:
 ```sh
 mkdir build-mpi && cd build-mpi
 cmake .. -DMPI=ON
 make -j
 ```
 
-## 6. Compilazione con Supporto Gnuplot
-Se si vuole abilitare il supporto per Gnuplot, usare il flag ENABLE_GNUPLOT:
+## 6. Compilation with Gnuplot Support
+If you want to enable Gnuplot support, use the ENABLE_GNUPLOT flag:
 ```sh
 mkdir build-gnuplot && cd build-gnuplot
 cmake .. -DENABLE_GNUPLOT=ON
 make -j
 ```
 
-## 7. Pulizia dei file di compilazione
-Se si desidera rimuovere i file di compilazione per ricompilare da zero:
+## 7. Cleaning Compilation Files
+If you want to remove compilation files to start over:
 ```sh
 rm -rf build*
 ```
