@@ -7,12 +7,19 @@ SRC = hybridAlgo.cpp
 EXEC = hybridAlgo
 OBJ = $(SRC:.cpp=.o)
 
+SRC_CONTINUATOR = hybridAlgoContinuator.cpp
+EXEC_CONTINUATOR = hybridAlgoContinuator
+OBJ_CONTINUATOR = $(SRC_CONTINUATOR:.cpp=.o)
+
 default: clean all
 
-all: $(EXEC)
+all: $(EXEC) $(EXEC_CONTINUATOR)
 
 $(EXEC): $(OBJ)
 	$(CXX) $(OBJ) -o $(EXEC) $(LDFLAGS)
+
+$(EXEC_CONTINUATOR): $(OBJ_CONTINUATOR)
+	$(CXX) $(OBJ_CONTINUATOR) -o $(EXEC_CONTINUATOR) $(LDFLAGS)
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
