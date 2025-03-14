@@ -25,4 +25,4 @@ $(EXEC_CONTINUATOR): $(OBJ_CONTINUATOR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ) $(EXEC) *.d *.sav *.xg *.status *~ *.out
+	rm -f $(OBJ) $(EXEC) $(EXEC_CONTINUATOR) $(OBJ_CONTINUATOR) *.d *.sav *.xg *.status *~ *.out
